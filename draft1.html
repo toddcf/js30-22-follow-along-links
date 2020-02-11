@@ -28,36 +28,34 @@
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
 
-    const highlighter = {
-      // Select all triggers (links):
-      triggers: document.querySelectorAll('a'),
-      // Create the highlighting element (span):
-      highlight: document.createElement('span'),
-      // Listen for user hovering over a link:
-      highlightLink: (e) => {
-        const linkCoords = e.currentTarget.getBoundingClientRect();
+    // Select all triggers (links):
+    const triggers = document.querySelectorAll('a');
 
-        const coords = {
-          width: linkCoords.width,
-          height: linkCoords.height,
-          // Offset for any user scrolling:
-          top: linkCoords.top + window.scrollY,
-          left: linkCoords.left + window.scrollX
-        }
+    // Create the highlighting element (span):
+    const highlight = document.createElement('span');
+    highlight.classList.add('highlight');
+    document.body.append(highlight);
 
-        // Apply styles to the element:
-        highlighter.highlight.style.width = `${coords.width}px`;
-        highlighter.highlight.style.height = `${coords.height}px`;
-        highlighter.highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-      },
-      init: () => {
-        highlighter.highlight.classList.add('highlight');
-        document.body.append(highlighter.highlight);
-        highlighter.triggers.forEach(a => a.addEventListener('mouseenter', highlighter.highlightLink));
+    // Listen for user hovering over a link:
+    const highlightLink = (e) => {
+      const linkCoords = e.currentTarget.getBoundingClientRect();
+      console.log(linkCoords);
+
+      const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        // Offset for any user scrolling:
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX
       }
+
+      // Apply styles to the element:
+      highlight.style.width = `${coords.width}px`;
+      highlight.style.height = `${coords.height}px`;
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
     }
 
-    highlighter.init();
+    triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
 
   </script>
 </body>
