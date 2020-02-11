@@ -1,1 +1,1 @@
-# js30-22-follow-along-links
+# JavaScript 30 #22: Follow Along Links
